@@ -28,20 +28,20 @@
 
 import Foundation
 
-public class URLTransform: TransformType {
+open class URLTransform: TransformType {
 	public typealias Object = URL
 	public typealias JSON = String
 
 	public init() {}
 
-	public func transformFromJSON(_ value: AnyObject?) -> URL? {
+	open func transformFromJSON(_ value: AnyObject?) -> URL? {
 		if let URLString = value as? String {
 			return URL(string: URLString)
 		}
 		return nil
 	}
 
-	public func transformToJSON(_ value: URL?) -> String? {
+	open func transformToJSON(_ value: URL?) -> String? {
 		if let URL = value {
 			return URL.absoluteString
 		}

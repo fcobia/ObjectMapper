@@ -401,7 +401,7 @@ class BasicTypesTestsFromJSON: XCTestCase {
 	}
 
 	func testObjectModelOptionalDictionnaryOfPrimitives() {
-		let JSON: [String: [String: AnyObject]] = ["dictStringString":["string": "string"], "dictStringBool":["string": false], "dictStringInt":["string": 1], "dictStringDouble":["string": 1.1], "dictStringFloat":["string": 1.2]]
+		let JSON: [String: [String: AnyObject]] = ["dictStringString":["string": "string" as NSString], "dictStringBool":["string": false as NSString], "dictStringInt":["string": 1 as NSNumber], "dictStringDouble":["string": 1.1 as NSNumber], "dictStringFloat":["string": 1.2 as NSNumber]]
 		
 		let mapper = Mapper<TestCollectionOfPrimitives>()
 		let testSet: TestCollectionOfPrimitives! = mapper.map(JSON)

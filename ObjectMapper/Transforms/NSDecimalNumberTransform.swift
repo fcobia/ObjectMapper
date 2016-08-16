@@ -1,12 +1,12 @@
 import Foundation
 
-public class NSDecimalNumberTransform: TransformType {
+open class NSDecimalNumberTransform: TransformType {
     public typealias Object = NSDecimalNumber
     public typealias JSON = String
 
     public init() {}
 
-    public func transformFromJSON(_ value: AnyObject?) -> NSDecimalNumber? {
+    open func transformFromJSON(_ value: AnyObject?) -> NSDecimalNumber? {
         if let string = value as? String {
             return NSDecimalNumber(string: string)
         }
@@ -16,7 +16,7 @@ public class NSDecimalNumberTransform: TransformType {
         return nil
     }
 
-    public func transformToJSON(_ value: NSDecimalNumber?) -> String? {
+    open func transformToJSON(_ value: NSDecimalNumber?) -> String? {
         guard let value = value else { return nil }
         return value.description
     }

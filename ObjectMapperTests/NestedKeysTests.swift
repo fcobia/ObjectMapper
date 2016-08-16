@@ -44,7 +44,7 @@ class NestedKeysTests: XCTestCase {
 
 	func testNestedKeys() {
 		let JSON: [String: AnyObject] = [
-			"non.nested.key": "string",
+			"non.nested.key": "string" as NSString,
 			"nested": [
 				"int64": NSNumber(value: INT64_MAX),
 				"bool": true,

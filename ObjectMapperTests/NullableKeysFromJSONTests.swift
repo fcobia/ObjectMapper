@@ -53,7 +53,7 @@ class NullableKeysFromJSONTests: XCTestCase {
 		XCTAssertNotNil(player.age)
 		XCTAssertNotNil(player.address?.city)
 
-		mapper.map(nullJSONString, toObject: player)
+		let _ = mapper.map(nullJSONString, toObject: player)
 
 		XCTAssertNotNil(player.firstName)
 		XCTAssertNil(player.lastName)
@@ -71,7 +71,7 @@ class NullableKeysFromJSONTests: XCTestCase {
 		XCTAssertNotNil(player.age)
 		XCTAssertNotNil(player.address?.city)
 
-		mapper.map(absentJSONString, toObject: player)
+		let _ = mapper.map(absentJSONString, toObject: player)
 
 		XCTAssertNotNil(player.firstName)
 		XCTAssertNotNil(player.lastName)

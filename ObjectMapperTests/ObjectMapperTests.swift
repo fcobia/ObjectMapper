@@ -135,7 +135,7 @@ class ObjectMapperTests: XCTestCase {
         let UUID: String = "12345"
         let major: Int = 99
         let minor: Int = 1
-        let json: [String: AnyObject] = ["name": name, "UUID": UUID, "major": major]
+        let json: [String: AnyObject] = ["name": name as NSString, "UUID": UUID as NSString, "major": major as NSNumber]
         
         //test that the sematics of value types works as expected.  the resulting maped student
         //should have the correct minor property set even thoug it's not mapped
@@ -153,9 +153,9 @@ class ObjectMapperTests: XCTestCase {
         let identifier: String = "Political"
         let photoCount: Int = 1000000000
         
-        let json2: [String: AnyObject] = ["username": username, "identifier": identifier, "photoCount": photoCount]
+        let json2: [String: AnyObject] = ["username": username as NSString, "identifier": identifier as NSString, "photoCount": photoCount as NSNumber]
         let user = User()
-        Mapper().map(json2, toObject: user)
+        let _ = Mapper().map(json2, toObject: user)
 		
 		XCTAssertEqual(username, user.username)
 		XCTAssertEqual(identifier, user.identifier)
@@ -178,7 +178,7 @@ class ObjectMapperTests: XCTestCase {
 		let user = User()
 		user.username = "Tristan"
 		
-		Mapper().map(JSONString, toObject: user)
+		let _ = Mapper().map(JSONString, toObject: user)
 
 		XCTAssertEqual(user.username, username)
 	}
@@ -202,7 +202,7 @@ class ObjectMapperTests: XCTestCase {
 		let user = User()
 		user.username = "Tristan"
 		
-		Mapper().map(userJSON as AnyObject?, toObject: user)
+		let _ = Mapper().map(userJSON as AnyObject?, toObject: user)
 
 		XCTAssertEqual(user.username, username)
 	}
@@ -492,7 +492,7 @@ class ObjectMapperTests: XCTestCase {
 	
 	func testImmutableMappable() {
 		let mapper = Mapper<Immutable>()
-		let JSON = ["prop1": "Immutable!", "prop2": 255, "prop3": true ]
+		let JSON = ["prop1": "Immutable!", "prop2": 255, "prop3": true ] as [String : Any]
 
 		let immutable: Immutable! = mapper.map(JSON)
 		XCTAssertNotNil(immutable)
@@ -501,7 +501,7 @@ class ObjectMapperTests: XCTestCase {
 		XCTAssertEqual(immutable.prop3, true)
 		XCTAssertEqual(immutable.prop4, DBL_MAX)
 
-		let JSON2 = [ "prop1": "prop1", "prop2": NSNull() ]
+		let JSON2 = [ "prop1": "prop1", "prop2": NSNull() ] as [String : Any]
 		let immutable2 = mapper.map(JSON2)
 		XCTAssertNil(immutable2)
 
@@ -541,17 +541,17 @@ class ObjectMapperTests: XCTestCase {
 
 	func testShouldPreventOverwritingMappableProperty() {
 		let json: [String: AnyObject] = [
-			"name": "Entry 1",
+			"name": "Entry 1" as NSString,
 			"bigList": [["name": "item 1"], ["name": "item 2"], ["name": "item 3"]]
 		]
 		let model = CachedModel()
-		Mapper().map(json, toObject: model)
+		let _ = Mapper().map(json, toObject: model)
 
 		XCTAssertEqual(model.name, "Entry 1")
 		XCTAssertEqual(model.bigList?.count, 3)
 
-		let json2: [String: AnyObject] = ["name": "Entry 1"]
-		Mapper().map(json2, toObject: model)
+		let json2: [String: AnyObject] = ["name": "Entry 1" as NSString]
+		let _ = Mapper().map(json2, toObject: model)
 
 		XCTAssertEqual(model.name, "Entry 1")
 		XCTAssertEqual(model.bigList?.count, 3)

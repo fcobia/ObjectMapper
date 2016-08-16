@@ -48,7 +48,7 @@ public final class Map {
 	let toObject: Bool // indicates whether the mapping is being applied to an existing object
 	
 	/// Counter for failing cases of deserializing values to `let` properties.
-	private var failedCount: Int = 0
+	fileprivate var failedCount: Int = 0
 	
 	public init(mappingType: MappingType, JSONDictionary: [String : AnyObject], toObject: Bool = false, context: MapContext? = nil) {
 		self.mappingType = mappingType
@@ -105,7 +105,7 @@ public final class Map {
 		return currentValue as? T
 	}
 	
-	public func valueOr<T>(defaultValue: @autoclosure () -> T) -> T {
+	public func valueOr<T>(_ defaultValue: @autoclosure () -> T) -> T {
 		return value() ?? defaultValue()
 	}
 	
