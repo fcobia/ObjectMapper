@@ -98,11 +98,15 @@ public extension Set where Element: Mappable {
 	
 	/// Initializes a set from JSON
 	public init?(JSONArray: [[String : AnyObject]]) {
+		let obj: Set<Element> = Mapper().mapSet(JSONArray)
+		self = obj
+		/*
 		if let obj: Set<Element> = Mapper().mapSet(JSONArray) {
 			self = obj
 		} else {
 			return nil
 		}
+		*/
 	}
 	
 	/// Returns the JSON Set
